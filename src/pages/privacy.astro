@@ -1,0 +1,213 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+
+const dataTable = [
+  {
+    titular: 'Cliente empresarial',
+    datos:
+      'Nombre o razón social, RFC, régimen fiscal, domicilio fiscal, correo, teléfono, nombre del representante, datos de facturación (CFDI) y de pago.',
+  },
+  {
+    titular: 'Usuario final del valet (como encargado)',
+    datos:
+      'Número de WhatsApp; placas, marca, modelo y color del vehículo; fotografías del vehículo al ingreso y a la salida; folio y código QR del boleto; fecha, hora y establecimiento; respuestas a encuestas de servicio. En liberación de emergencia: copia de identificación oficial y tarjeta de circulación.',
+  },
+  {
+    titular: 'Personal del operador (como encargado)',
+    datos:
+      'Nombre, puesto, horarios, asistencias, registros de actividad en la plataforma y datos para el cálculo de nómina.',
+  },
+  {
+    titular: 'Visitante del sitio web',
+    datos: 'Datos de formulario de contacto, dirección IP, datos de navegación y cookies.',
+  },
+];
+
+const primaryPurposes = [
+  'Registrar la entrada y salida del vehículo, emitir el boleto digital y entregarlo al titular correcto.',
+  'Enviar por WhatsApp el boleto, avisos de estado y el enlace para solicitar el vehículo.',
+  'Documentar el estado del vehículo como evidencia ante incidencias o reclamaciones.',
+  'Validar la identidad del titular en una liberación de emergencia.',
+  'Administrar personal, horarios y nómina del operador.',
+  'Facturar, cobrar, dar soporte técnico y cumplir obligaciones fiscales y legales.',
+  'Elaborar reportes operativos y estadísticos para el operador.',
+];
+
+const secondaryPurposes = [
+  'Enviar promociones, encuestas no relacionadas con el servicio o publicidad propia o de terceros.',
+  'Elaborar perfiles o segmentos con fines comerciales o publicitarios.',
+];
+
+const providers = [
+  { name: 'Amazon Web Services', purpose: 'alojamiento y almacenamiento de datos y fotografías.' },
+  { name: 'Meta Platforms (WhatsApp Business) y/o su proveedor de mensajería', purpose: 'envío de mensajes.' },
+  { name: 'Distribuidores autorizados (Brokers)', purpose: 'soporte de primer nivel, con acceso limitado a lo necesario.' },
+];
+
+const arcoRequirements = [
+  'Su nombre y un medio de contacto.',
+  'Una identificación (o, en su caso, la de su representante).',
+  'Una descripción clara de su solicitud.',
+  'Si los datos derivan de un servicio de valet, el folio del boleto.',
+];
+---
+
+<LegalLayout
+  title="Aviso de Privacidad — ProParking"
+  description="Aviso de privacidad integral de ProParking: qué datos personales tratamos, con qué fines, con quién los compartimos y cómo ejercer tus derechos ARCO."
+  eyebrow="Legal"
+  heading="Aviso de Privacidad Integral"
+  subtitle="Cómo ProParking recaba, usa y protege los datos personales de clientes, usuarios finales y visitantes del sitio."
+>
+  <p class="doc-meta">Última actualización: 20 de octubre de 2026</p>
+
+  <h2>1. Responsable</h2>
+  <p>
+    Omar Galindo Romo (en adelante "ProParking"), con RFC GARO810512TI9 y domicilio en Av. Valle
+    de la Sierra #2753, L13, Valle Alto, C.P. 80050, Culiacán, Sinaloa, es responsable del
+    tratamiento de los datos personales que recaba directamente de sus clientes, prospectos y
+    visitantes de proparking.mx, conforme a la Ley Federal de Protección de Datos Personales en
+    Posesión de los Particulares (LFPDPPP, DOF 20-mar-2025).
+  </p>
+  <p>Contacto de privacidad: contacto@proparking.mx · 667 102 5632.</p>
+
+  <h2>2. Calidad en la que actuamos</h2>
+  <ul>
+    <li>
+      Como <strong>responsable</strong>: respecto de los datos de nuestros clientes empresariales
+      (operadores de valet, propiedades), sus representantes y los visitantes de nuestro sitio.
+    </li>
+    <li>
+      Como <strong>encargado</strong>: respecto de los datos de los usuarios finales del servicio
+      de valet y del personal del operador. En este caso el responsable es el operador de valet
+      que contrata la plataforma; ProParking trata esos datos solo por cuenta y bajo instrucciones
+      de dicho operador. El operador debe poner a disposición de sus usuarios su propio aviso de
+      privacidad (puede usar como base el modelo del Anexo A).
+    </li>
+  </ul>
+
+  <h2>3. Datos personales que tratamos</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Titular</th>
+          <th>Datos</th>
+        </tr>
+      </thead>
+      <tbody>
+        {dataTable.map((row) => (
+          <tr>
+            <td class="font-semibold text-ink-700">{row.titular}</td>
+            <td>{row.datos}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p>
+    <strong>Datos sensibles:</strong> ProParking no solicita datos sensibles. Las fotografías del
+    vehículo se toman con fines de evidencia de su estado; pueden captar de forma incidental
+    personas u objetos en el interior. El personal debe evitar fotografiar a personas y esas
+    imágenes no se usan con ningún otro fin.
+  </p>
+  <p>
+    No recabamos datos financieros de tarjetas. Actualmente no utilizamos una pasarela de pagos:
+    los cobros se gestionan directamente con el cliente.
+  </p>
+
+  <h2>4. Finalidades</h2>
+  <h3>Primarias (necesarias para el servicio)</h3>
+  <ol>
+    {primaryPurposes.map((item) => <li>{item}</li>)}
+  </ol>
+  <h3>Secundarias (requieren su consentimiento expreso; puede negarse sin afectar el servicio)</h3>
+  <ol>
+    {secondaryPurposes.map((item) => <li>{item}</li>)}
+  </ol>
+  <p>
+    Si no desea que sus datos se usen para fines secundarios, no marque la casilla de aceptación
+    correspondiente o escriba a contacto@proparking.mx en cualquier momento.
+  </p>
+
+  <h2>5. Transferencias y encargados</h2>
+  <p>
+    Para prestar el servicio usamos proveedores que tratan datos por nuestra cuenta (remisiones),
+    sin requerir su consentimiento:
+  </p>
+  <ul>
+    {providers.map((p) => (
+      <li>
+        <strong>{p.name}</strong>: {p.purpose}
+      </li>
+    ))}
+  </ul>
+  <p>
+    Algunos de estos proveedores pueden alojar información fuera de México, con medidas
+    contractuales de protección.
+  </p>
+  <p>Transferencias sin consentimiento, conforme a la ley:</p>
+  <ul>
+    <li>A autoridades competentes cuando lo requiera la ley o una orden judicial.</li>
+    <li>A aseguradoras o al operador cuando sea necesario para atender un siniestro o reclamación.</li>
+  </ul>
+  <p><strong>No vendemos ni rentamos datos personales.</strong></p>
+
+  <h2>6. Conservación</h2>
+  <p>
+    Las fotografías permanecen en almacenamiento activo hasta 48 horas después del servicio.
+    Después pasan a almacenamiento de archivo durante 2 semanas para atender reclamaciones, y
+    luego se eliminan. Los datos fiscales se conservan por el plazo que exigen las leyes fiscales.
+  </p>
+
+  <h2>7. Derechos ARCO y revocación del consentimiento</h2>
+  <p>
+    Puede Acceder, Rectificar, Cancelar u Oponerse al tratamiento de sus datos, revocar su
+    consentimiento o limitar su uso. Para hacerlo, envíe una solicitud a contacto@proparking.mx
+    con:
+  </p>
+  <ul>
+    {arcoRequirements.map((item) => <li>{item}</li>)}
+  </ul>
+  <p>
+    Responderemos en un máximo de 20 días hábiles y, si procede, la haremos efectiva dentro de los
+    15 días hábiles siguientes. Estos plazos pueden ampliarse una vez por un periodo igual cuando
+    se justifique.
+  </p>
+  <p>
+    Si su solicitud se refiere a datos que tratamos como encargado, la turnaremos al operador
+    responsable y le informaremos.
+  </p>
+
+  <h2>8. Cookies</h2>
+  <p>
+    Nuestro sitio utiliza cookies propias y de análisis para su funcionamiento y para medir
+    visitas. Puede desactivarlas desde la configuración de su navegador.
+  </p>
+
+  <h2>9. Cambios al aviso</h2>
+  <p>
+    Cualquier cambio se publicará en proparking.mx/privacy, indicando la fecha de actualización.
+  </p>
+
+  <h2>10. Autoridad</h2>
+  <p>
+    Si considera vulnerado su derecho a la protección de datos, puede acudir a la Secretaría
+    Anticorrupción y Buen Gobierno, autoridad competente conforme a la LFPDPPP vigente.
+  </p>
+
+  <h2>Anexo A. Aviso simplificado para el boleto digital (modelo para el operador)</h2>
+  <blockquote>
+    <span class="ph">[NOMBRE DEL OPERADOR]</span>, con domicilio en
+    <span class="ph">[DOMICILIO]</span>, es responsable de sus datos (número de WhatsApp, datos y
+    fotografías de su vehículo). Los usamos para registrar y entregar su vehículo, enviarle su
+    boleto y documentar el estado del auto. La plataforma ProParking los procesa por nuestra
+    cuenta. Si autoriza recibir promociones, márquelo aquí: [ ]. Aviso integral y derechos ARCO:
+    proparking.mx/privacy.
+  </blockquote>
+  <p class="text-xs text-ink-400">
+    <span class="ph">[NOMBRE DEL OPERADOR]</span> y <span class="ph">[DOMICILIO]</span> los
+    completa cada operador con sus propios datos al publicar este aviso simplificado ante sus
+    usuarios finales — no son datos de ProParking.
+  </p>
+</LegalLayout>

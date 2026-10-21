@@ -1,0 +1,104 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'ProParking — Digital Partner para operaciones de valet parking',
+  description = 'ProParking es la plataforma B2B SaaS que digitaliza la operación de valet parking de hoteles, restaurantes y eventos: boletos digitales, cobro, turnos de personal y bitácora de auditoría en tiempo real.',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL('/images/logo.png', Astro.site);
+
+// Datos estructurados (JSON-LD) para motores de búsqueda y asistentes basados en LLM.
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'ProParking',
+  alternateName: 'ProParking Digital Partner',
+  url: canonicalURL.origin,
+  logo: ogImageURL.toString(),
+  description,
+  areaServed: 'MX',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Culiacán',
+    addressRegion: 'Sinaloa',
+    addressCountry: 'MX',
+  },
+};
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'ProParking',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web, iOS, Android',
+  description:
+    'Suite B2B SaaS compuesta por App Ticketero, App Cajero y Web Admin para digitalizar la recepción, cobro, trazabilidad y auditoría de operaciones de valet parking.',
+  offers: {
+    '@type': 'Offer',
+    availability: 'https://schema.org/InStock',
+    url: canonicalURL.toString(),
+  },
+  provider: {
+    '@type': 'Organization',
+    name: 'ProParking',
+  },
+};
+---
+
+<!doctype html>
+<html lang="es" class="scroll-pt-20">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#2C2C2A" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:site_name" content="ProParking" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+
+    <slot name="head" />
+  </head>
+  <body class="font-sans">
+    <a
+      href="#contenido"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-ink-800 focus:px-4 focus:py-2 focus:text-white"
+    >
+      Saltar al contenido
+    </a>
+    <slot />
+  </body>
+</html>

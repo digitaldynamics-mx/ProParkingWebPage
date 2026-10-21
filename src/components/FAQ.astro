@@ -1,0 +1,73 @@
+---
+const faqs = [
+  {
+    q: '¿Qué es ProParking?',
+    a: 'ProParking es una plataforma B2B SaaS que digitaliza la operación de valet parking de hoteles, restaurantes y eventos: recepción de vehículos, cobro, turnos del personal y trazabilidad, a través de tres apps conectadas a un mismo backend.',
+  },
+  {
+    q: '¿Para qué tipo de negocios es ProParking?',
+    a: 'Para cualquier negocio que ofrezca valet parking como parte de su operación: hoteles, restaurantes y eventos, desde un solo punto de servicio hasta cadenas multi-sucursal.',
+  },
+  {
+    q: '¿Reemplaza por completo los boletos de papel?',
+    a: 'Sí. La App Ticketero genera un boleto digital en el momento de la recepción, y la App Cajero lo cierra al momento del cobro y la entrega, eliminando el boleto físico y su riesgo de pérdida.',
+  },
+  {
+    q: '¿Cómo funciona la bitácora de auditoría?',
+    a: 'Cada acción —recepción, resguardo, cobro y entrega— queda registrada con usuario, hora y estado en una bitácora forense, visible desde el Web Admin para el dueño del negocio.',
+  },
+  {
+    q: '¿Se puede usar en varias sucursales a la vez?',
+    a: 'Sí, el Web Admin está pensado para administrar varias sedes desde un mismo panel, con reportes y bitácora independientes por sucursal.',
+  },
+  {
+    q: '¿Qué necesito para empezar a usar ProParking?',
+    a: 'Dispositivos móviles para el equipo de valet y caja (App Ticketero y App Cajero) y una computadora o tableta para el Web Admin. Nuestro equipo te acompaña en el onboarding.',
+  },
+];
+---
+
+<section id="preguntas" class="bg-cream-100 py-20 sm:py-24" aria-labelledby="faq-heading">
+  <div class="container-px grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:gap-16">
+    <div>
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2 id="faq-heading" class="section-title mt-4">Todo lo que quieres saber antes de empezar</h2>
+      <p class="section-lede">¿No encuentras tu pregunta? Escríbenos y te respondemos directamente.</p>
+      <a href="#cta" class="btn-secondary mt-7 inline-flex">Hablar con el equipo</a>
+    </div>
+
+    <div class="divide-y divide-ink-700/8 rounded-2xl border border-ink-700/8 bg-white">
+      {faqs.map((item, i) => (
+        <details class="group p-6 open:bg-cream-50 sm:p-7" {...(i === 0 ? { open: true } : {})}>
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-ink-700">
+            {item.q}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 shrink-0 text-orange-500 transition-transform duration-300 group-open:rotate-45"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          </summary>
+          <p class="mt-3 text-sm leading-relaxed text-ink-400">{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.a,
+    },
+  })),
+})} />

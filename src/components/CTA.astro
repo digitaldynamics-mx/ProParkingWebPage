@@ -1,0 +1,96 @@
+---
+---
+
+<section id="cta" class="relative overflow-hidden bg-ink-800 py-20 sm:py-24">
+  <div class="pointer-events-none absolute left-1/2 top-0 h-80 w-[36rem] -translate-x-1/2 rounded-full bg-orange-500/20 blur-3xl"></div>
+
+  <div class="container-px relative text-center">
+    <span class="eyebrow bg-white/10 text-orange-300">Hablemos</span>
+    <h2 class="section-title mx-auto mt-5 max-w-2xl !text-white">
+      ¿Listo para digitalizar tu operación de valet parking?
+    </h2>
+    <p class="mx-auto mt-4 max-w-xl text-base text-white/60 sm:text-lg">
+      Agenda una demo con nuestro equipo y te mostramos cómo ProParking se adapta a tu negocio.
+    </p>
+
+    <form class="mx-auto mt-10 flex max-w-xl flex-col gap-3 sm:flex-row" data-demo-form>
+      <label for="email-demo" class="sr-only">Correo electrónico</label>
+      <input
+        id="email-demo"
+        name="email"
+        type="email"
+        required
+        placeholder="tu@negocio.com"
+        class="w-full flex-1 rounded-xl border-2 border-white/15 bg-white/5 px-5 py-3.5 text-sm text-white placeholder:text-white/40 focus:border-orange-500 focus:outline-none"
+      />
+      <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+      <button type="submit" class="btn-primary shrink-0">Solicitar demo</button>
+    </form>
+    <p class="mt-4 text-xs text-white/40">Te contactamos en menos de 24 horas hábiles. Sin compromiso.</p>
+  </div>
+</section>
+
+<script>
+  const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
+  const accessKey = import.meta.env.PUBLIC_WEB3FORMS_KEY;
+
+  const form = document.querySelector<HTMLFormElement>('[data-demo-form]');
+  const submitButton = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+  function showError(message: string) {
+    form?.querySelector('[data-demo-error]')?.remove();
+    const errorEl = document.createElement('p');
+    errorEl.className = 'mt-3 text-sm text-orange-300';
+    errorEl.setAttribute('data-demo-error', '');
+    errorEl.textContent = message;
+    form?.insertAdjacentElement('afterend', errorEl);
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!accessKey) {
+      showError(
+        'Configuración pendiente: falta conectar el envío de correo. Escríbenos directamente a proparkingidigitalpartner@gmail.com mientras tanto.'
+      );
+      return;
+    }
+
+    const emailInput = form.elements.namedItem('email') as HTMLInputElement;
+    const email = emailInput?.value ?? '';
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Enviando…';
+    }
+
+    try {
+      const response = await fetch(WEB3FORMS_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: 'Nueva solicitud de demo — ProParking',
+          from_name: 'Landing ProParking',
+          email,
+          message: `Solicitud de demo desde la landing de ProParking. Correo del interesado: ${email}`,
+          botcheck: (form.elements.namedItem('botcheck') as HTMLInputElement)?.checked ?? false,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        form.innerHTML = '<p class="text-white font-semibold">¡Gracias! Te contactaremos muy pronto.</p>';
+      } else {
+        throw new Error(result.message || 'Error desconocido');
+      }
+    } catch (err) {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Solicitar demo';
+      }
+      showError('No se pudo enviar. Intenta de nuevo o escríbenos a proparkingidigitalpartner@gmail.com.');
+    }
+  });
+</script>

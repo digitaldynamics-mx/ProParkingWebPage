@@ -1,0 +1,91 @@
+---
+// Los montos aún no están definidos comercialmente para la landing pública.
+// Por eso cada plan apunta a "Hablar con ventas" en vez de mostrar un precio.
+// La tabla oficial de precios por paquete ya vive en /terms-and-conditions.
+const plans = [
+  {
+    name: 'Starter',
+    priceLabel: 'A la medida',
+    tagline: 'Para un solo punto de operación',
+    featured: false,
+    features: [
+      'App Ticketero + App Cajero',
+      '1 sucursal',
+      'Boleto digital ilimitado',
+      'Reportes básicos',
+      'Soporte por correo',
+    ],
+  },
+  {
+    name: 'Pro',
+    priceLabel: 'A la medida',
+    tagline: 'Para operaciones con varios turnos',
+    featured: true,
+    features: [
+      'Todo lo de Starter',
+      'Web Admin completo',
+      'Bitácora forense de auditoría',
+      'Control de turnos y empleados',
+      'Soporte prioritario',
+    ],
+  },
+  {
+    name: 'Enterprise',
+    priceLabel: 'A la medida',
+    tagline: 'Para cadenas multi-sucursal',
+    featured: false,
+    features: [
+      'Todo lo de Pro',
+      'Multi-sucursal centralizado',
+      'Integraciones a medida',
+      'SLA dedicado',
+      'Onboarding asistido',
+    ],
+  },
+];
+---
+
+<section id="planes" class="bg-ink-800 py-20 sm:py-24" aria-labelledby="planes-heading">
+  <div class="container-px">
+    <div class="max-w-2xl">
+      <span class="eyebrow bg-white/10 text-orange-300">Planes</span>
+      <h2 id="planes-heading" class="section-title mt-4 !text-white">Un plan para cada tamaño de operación</h2>
+      <p class="mt-4 max-w-2xl text-base text-white/60 sm:text-lg">
+        Cotizamos según número de sucursales, turnos y volumen de boletos. Habla con nosotros y armamos el plan correcto para tu negocio.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-6 lg:grid-cols-3">
+      {plans.map((plan) => (
+        <div class={`flex flex-col rounded-2xl p-7 sm:p-8 ${plan.featured ? 'relative border-2 border-orange-500 bg-ink-700 shadow-card-hover' : 'border border-white/10 bg-white/5'}`}>
+          {plan.featured && (
+            <span class="absolute -top-3 left-7 rounded-full bg-orange-500 px-3 py-1 text-xs font-bold text-white">
+              Más elegido
+            </span>
+          )}
+          <h3 class="text-xl !text-white">{plan.name}</h3>
+          <p class="mt-1 text-sm text-white/50">{plan.tagline}</p>
+          <p class="mt-6 text-2xl font-extrabold text-white">{plan.priceLabel}</p>
+
+          <ul class="mt-6 flex-1 space-y-3">
+            {plan.features.map((f) => (
+              <li class="flex items-start gap-2.5 text-sm text-white/70">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mt-0.5 h-4 w-4 shrink-0 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+                {f}
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href="#cta"
+            class={plan.featured ? 'btn-primary mt-8 w-full' : 'btn-ghost-light mt-8 w-full'}
+          >
+            Hablar con ventas
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

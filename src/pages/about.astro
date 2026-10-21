@@ -1,0 +1,59 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+
+const whatWeDo = [
+  'Registrar cada vehículo con boleto digital por WhatsApp y evidencia fotográfica.',
+  'Controlar los ingresos reales de cada punto.',
+  'Administrar personal, horarios y nómina.',
+  'Medir la calidad del servicio con encuestas y reportes.',
+  'Tomar decisiones con información financiera y operativa clara.',
+];
+---
+
+<LegalLayout
+  title="Acerca de ProParking — Digital Partner para valet parking"
+  description="ProParking nació dentro de la operación diaria de un valet. Conoce qué hacemos, cómo trabajamos y quién está detrás de la plataforma."
+  eyebrow="Acerca de"
+  heading="Acerca de ProParking Digital Partner"
+  subtitle="Una plataforma construida por gente que ha operado un valet, no solo programado software."
+>
+  <p>
+    ProParking Digital Partner es una plataforma digital para la gestión y administración de
+    empresas de valet parking. Nació dentro de la operación diaria de un valet, como respuesta a
+    problemas que conocemos de primera mano: control de entradas y salidas, flujo de efectivo,
+    evidencia del estado de los vehículos, administración del personal y experiencia del usuario.
+  </p>
+
+  <h2>Qué hacemos</h2>
+  <p>Damos a operadores y propiedades con valet una herramienta práctica para:</p>
+  <ul>
+    {whatWeDo.map((item) => <li>{item}</li>)}
+  </ul>
+
+  <h2>Cómo trabajamos</h2>
+  <p>
+    Renta fija mensual con uso justo incluido: no cobramos por auto dentro del volumen de su
+    paquete, sin costos ocultos y sin contratos forzosos. Usted paga por el paquete y los
+    dispositivos que necesita.
+  </p>
+
+  <h2>Misión</h2>
+  <p>
+    Proveer una herramienta digital desarrollada por expertos en valet parking, que ofrezca
+    soluciones prácticas y personalizadas basadas en experiencias reales.
+  </p>
+
+  <h2>Quién está detrás</h2>
+  <p>
+    ProParking fue creado y desarrollado por <strong>Omar Galindo Romo</strong>, fundador del
+    proyecto y operador de valet parking. Su experiencia en la operación dio forma a cada función
+    de la plataforma.
+  </p>
+
+  <blockquote>
+    <p class="!mt-0">Contacto: contacto@proparking.mx · 667 102 5632 · Culiacán, Sinaloa</p>
+    <p class="!mt-2 text-xs text-ink-400">
+      © 2026 Omar Galindo Romo. ProParking Digital Partner. Todos los derechos reservados.
+    </p>
+  </blockquote>
+</LegalLayout>

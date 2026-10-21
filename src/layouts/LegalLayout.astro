@@ -1,0 +1,31 @@
+---
+import Layout from './Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow: string;
+  heading: string;
+  subtitle?: string;
+}
+
+const { title, description, eyebrow, heading, subtitle } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <Header />
+  <main id="contenido">
+    <PageHero eyebrow={eyebrow} heading={heading} subtitle={subtitle} />
+    <section class="bg-cream-100 py-16 sm:py-20">
+      <div class="container-px">
+        <div class="legal-content mx-auto max-w-3xl">
+          <slot />
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,61 @@
+---
+const year = new Date().getFullYear();
+
+const columns = [
+  {
+    title: 'Producto',
+    links: [
+      { label: 'App Ticketero', href: '/#producto' },
+      { label: 'App Cajero', href: '/#producto' },
+      { label: 'Web Admin', href: '/#producto' },
+      { label: 'Planes', href: '/#planes' },
+    ],
+  },
+  {
+    title: 'Compañía',
+    links: [
+      { label: 'Acerca de', href: '/about' },
+      { label: 'Cómo funciona', href: '/#como-funciona' },
+      { label: 'Beneficios', href: '/#beneficios' },
+      { label: 'Preguntas frecuentes', href: '/#preguntas' },
+    ],
+  },
+];
+---
+
+<footer class="bg-ink-900 pb-8 pt-16 sm:pt-20">
+  <div class="container-px">
+    <div class="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr]">
+      <div>
+        <img src="/images/logo.png" alt="ProParking — Digital Partner" class="h-9 w-auto brightness-0 invert" width="512" height="159" />
+        <p class="mt-4 max-w-sm text-sm leading-relaxed text-white/50">
+          Plataforma B2B SaaS que digitaliza la operación de valet parking para hoteles, restaurantes y eventos.
+        </p>
+        <p class="mt-6 text-xs text-white/30">Un producto de Digital Dynamics · Culiacán, Sinaloa</p>
+      </div>
+
+      {columns.map((col) => (
+        <nav aria-label={col.title}>
+          <h3 class="text-sm font-bold uppercase tracking-wider text-white/40">{col.title}</h3>
+          <ul class="mt-4 space-y-3">
+            {col.links.map((link) => (
+              <li>
+                <a href={link.href} class="text-sm text-white/60 transition-colors hover:text-orange-300">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))}
+    </div>
+
+    <div class="mt-14 flex flex-col gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-xs text-white/35">© {year} ProParking. Todos los derechos reservados.</p>
+      <div class="flex gap-6 text-xs text-white/35">
+        <a href="/privacy" class="hover:text-white/60">Aviso de privacidad</a>
+        <a href="/terms-and-conditions" class="hover:text-white/60">Términos y condiciones</a>
+      </div>
+    </div>
+  </div>
+</footer>

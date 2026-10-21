@@ -1,0 +1,191 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+
+const packages = [
+  { name: 'Básico', price: '$3,999', points: '1', devices: '1', extraDevice: '$499' },
+  { name: 'Operador JR', price: '$5,999', points: 'Hasta 5', devices: '5', extraDevice: '$439' },
+  { name: 'Profesional', price: '$12,999', points: 'Hasta 15', devices: '7', extraDevice: '$419' },
+  { name: 'Enterprise', price: '$16,999', points: 'Ilimitados', devices: '20', extraDevice: '$389' },
+];
+
+const clientObligations = [
+  'Proporcionar información veraz y mantener seguras sus credenciales.',
+  'Capacitar a su personal y verificar físicamente cada vehículo al recibirlo y entregarlo.',
+  'Contar con el seguro de responsabilidad civil y cumplir los requisitos de boleto que exija la normativa local aplicable al valet parking.',
+  'Publicar su aviso de privacidad ante los usuarios finales y obtener su consentimiento cuando se requiera.',
+  'No usar la plataforma para fines ilícitos ni para enviar mensajes no solicitados.',
+];
+---
+
+<LegalLayout
+  title="Términos y Condiciones — ProParking"
+  description="Términos y condiciones de uso de la plataforma ProParking: licencia, paquetes y precios, niveles de servicio, responsabilidades y vigencia."
+  eyebrow="Legal"
+  heading="Términos y Condiciones de Uso"
+  subtitle="Las reglas que regulan el uso de la plataforma ProParking por parte de operadores y propiedades con valet."
+>
+  <p class="doc-meta">Última actualización: 20 de octubre de 2026</p>
+
+  <p>
+    Estos términos regulan el uso de la plataforma ProParking, operada por Omar Galindo Romo (RFC
+    GARO810512TI9, domicilio Av. Valle de la Sierra #2753, L13, Valle Alto, C.P. 80050, Culiacán,
+    Sinaloa). Al contratar o usar la plataforma, usted los acepta.
+  </p>
+
+  <h2>1. Definiciones</h2>
+  <ul>
+    <li><strong>Plataforma:</strong> el software ProParking en la nube, su aplicación web, su app para dispositivos y la integración con WhatsApp.</li>
+    <li><strong>Cliente:</strong> la persona física o moral que contrata un paquete (operador de valet o propiedad con valet propio).</li>
+    <li><strong>Usuario final:</strong> la persona que deja su vehículo y recibe el boleto digital.</li>
+    <li><strong>Punto:</strong> cada ubicación física donde el Cliente opera el servicio de valet.</li>
+    <li><strong>Movimiento:</strong> cada ciclo completo de entrada y salida de un vehículo registrado.</li>
+  </ul>
+
+  <h2>2. Objeto y licencia</h2>
+  <p>
+    ProParking otorga al Cliente una licencia de uso no exclusiva, intransferible y temporal,
+    vigente mientras esté al corriente en sus pagos. La licencia no implica venta del software. El
+    Cliente no podrá copiar, revender, sublicenciar ni aplicar ingeniería inversa a la plataforma.
+  </p>
+
+  <h2>3. Paquetes y precios</h2>
+  <p>Renta fija mensual por paquete, precios con IVA incluido:</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Paquete</th>
+          <th>Renta mensual</th>
+          <th>Puntos</th>
+          <th>Dispositivos incluidos</th>
+          <th>Dispositivo adicional / mes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {packages.map((pkg) => (
+          <tr>
+            <td class="font-semibold text-ink-700">{pkg.name}</td>
+            <td>{pkg.price}</td>
+            <td>{pkg.points}</td>
+            <td>{pkg.devices}</td>
+            <td>{pkg.extraDevice}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <ul>
+    <li>
+      <strong>Instalación y configuración (pago único):</strong> $2,500, $3,500 o $5,000 según el
+      paquete, más viáticos fuera de Culiacán.
+    </li>
+    <li>
+      <strong>Facturación:</strong> la renta se factura por mes adelantado. Si un pago se retrasa
+      más de 10 días naturales, ProParking podrá restringir funciones administrativas, previo
+      aviso. El registro de entradas y salidas en curso no se interrumpe.
+    </li>
+    <li><strong>Ajustes de precio:</strong> los precios podrán ajustarse con aviso de al menos 30 días.</li>
+  </ul>
+
+  <h2>4. Uso justo y excedentes</h2>
+  <p>
+    Cada paquete incluye un volumen de referencia de movimientos mensuales, conforme al documento
+    "Cláusula de Uso Justo y Excedentes", que forma parte de estos términos. El volumen excedente
+    se cobra por bloques al precio vigente.
+  </p>
+  <p>
+    El servicio no se suspende por exceder el volumen: el excedente se notifica y se factura en el
+    periodo siguiente. Si el exceso es recurrente, se podrá proponer un cambio de paquete.
+  </p>
+
+  <h2>5. Dispositivos</h2>
+  <ul>
+    <li>El Cliente puede usar equipos propios que cumplan los requisitos mínimos publicados, o rentar equipos a ProParking.</li>
+    <li>ProParking no responde por fallas, robo o daño de equipos propiedad del Cliente.</li>
+    <li>Los equipos rentados deben devolverse en buen estado al terminar el servicio; su pérdida o daño se cobrará a valor de reposición.</li>
+  </ul>
+
+  <h2>6. Nivel de servicio y soporte</h2>
+  <ul>
+    <li>
+      <strong>Disponibilidad:</strong> ProParking procura una disponibilidad mensual de 99.5%. Se
+      excluyen mantenimientos programados (avisados con 48 horas de anticipación), fallas de
+      internet o de energía del Cliente, y caídas de terceros como WhatsApp, AWS o los operadores
+      de telefonía.
+    </li>
+    <li><strong>Contingencia:</strong> la plataforma cuenta con un modo de respaldo para seguir registrando vehículos durante una interrupción.</li>
+    <li>
+      <strong>Soporte:</strong> el soporte de primer nivel lo da el distribuidor (Broker) asignado
+      o contacto@proparking.mx, en horario de 9:00 a. m. a 9:00 p. m. Los incidentes críticos se
+      escalan a ProParking.
+    </li>
+  </ul>
+
+  <h2>7. Obligaciones del Cliente</h2>
+  <ol>
+    {clientObligations.map((item) => <li>{item}</li>)}
+  </ol>
+
+  <h2>8. Responsabilidad</h2>
+  <ul>
+    <li>
+      ProParking es una herramienta de gestión. <strong>No presta el servicio de valet parking ni
+      tiene la custodia de los vehículos.</strong> La responsabilidad por la guarda, daños, robo o
+      pérdida de vehículos y objetos corresponde al Cliente que opera el servicio.
+    </li>
+    <li>Las fotografías y registros de la plataforma son un medio de evidencia del estado del vehículo. No sustituyen la revisión física ni limitan los derechos del usuario final.</li>
+  </ul>
+  <p>
+    La responsabilidad total de ProParking frente al Cliente, por cualquier causa, se limita al
+    monto pagado por el Cliente en los tres meses anteriores al hecho. ProParking no responde por
+    lucro cesante ni daños indirectos.
+  </p>
+  <p>ProParking no es responsable de interrupciones causadas por terceros o por caso fortuito o fuerza mayor.</p>
+
+  <h2>9. Datos e información</h2>
+  <ul>
+    <li>La información operativa que genera el Cliente (movimientos, ingresos, reportes) es del Cliente. Puede exportarla mientras su cuenta esté activa y durante 30 días después de la terminación.</li>
+    <li>
+      ProParking trata los datos personales como encargado del Cliente, conforme a su
+      <a href="/privacy">Aviso de Privacidad</a> y a la LFPDPPP.
+    </li>
+    <li>ProParking podrá usar datos agregados y anonimizados, que no identifiquen al Cliente ni a personas, para mejorar la plataforma y elaborar estadísticas.</li>
+  </ul>
+
+  <h2>10. Propiedad intelectual</h2>
+  <p>
+    El software, la marca ProParking, sus logotipos, diseños, algoritmos y documentación son
+    propiedad de Omar Galindo Romo. Ninguna disposición de estos términos transfiere esos derechos
+    al Cliente.
+  </p>
+
+  <h2>11. Vigencia y terminación</h2>
+  <ul>
+    <li><strong>Sin plazo forzoso:</strong> el servicio es mes a mes. El Cliente puede cancelar con aviso por escrito de 30 días, sin penalización.</li>
+    <li>ProParking puede terminar el servicio por falta de pago o por incumplimiento grave de estos términos, previo aviso.</li>
+    <li>Los pagos de instalación y los meses ya facturados no son reembolsables.</li>
+  </ul>
+
+  <h2>12. Usuarios finales</h2>
+  <p>
+    El usuario final que recibe un boleto digital acepta que sus datos se traten conforme al aviso
+    de privacidad del operador. El boleto digital es personal: quien lo presente podrá solicitar
+    el vehículo. Si el usuario pierde el acceso, se aplicará el protocolo de liberación de
+    emergencia, que requiere identificación oficial y tarjeta de circulación.
+  </p>
+
+  <h2>13. Modificaciones</h2>
+  <p>
+    ProParking podrá modificar estos términos y avisará al Cliente con al menos 15 días de
+    anticipación. El uso continuado de la plataforma implica la aceptación de los cambios.
+  </p>
+
+  <h2>14. Legislación y jurisdicción</h2>
+  <p>
+    Estos términos se rigen por las leyes federales de México. Para cualquier controversia, las
+    partes se someten a los tribunales de Culiacán, Sinaloa y renuncian a cualquier otro fuero. Lo
+    anterior no limita los derechos que la Ley Federal de Protección al Consumidor otorga a los
+    usuarios finales.
+  </p>
+  <p>Contacto: contacto@proparking.mx · 667 102 5632 · proparking.mx</p>
+</LegalLayout>

@@ -1,0 +1,30 @@
+# ProParking
+
+> ProParking es una plataforma B2B SaaS que digitaliza la operación de valet parking para hoteles, restaurantes y eventos: recepción de vehículos, cobro, turnos de personal y trazabilidad forense, a través de tres aplicaciones conectadas a un mismo backend.
+
+ProParking resuelve los problemas de la operación de valet parking tradicional: boletos de papel sin respaldo, cero visibilidad del dueño del negocio sobre cada turno, y riesgo de pérdidas o disputas por cobros no registrados.
+
+## Producto
+
+- **App Ticketero** (móvil): el valet recibe el vehículo, genera el boleto digital y registra el resguardo.
+- **App Cajero** (móvil): cobro al cliente, cierre del boleto y entrega del vehículo.
+- **Web Admin** (escritorio): dashboard, empleados, turnos, reportes y bitácora forense de auditoría.
+
+Las tres aplicaciones comparten el mismo backend y la misma base de datos, dando trazabilidad completa de cada boleto de principio a fin.
+
+## Segmentos
+
+- Hoteles
+- Restaurantes
+- Eventos
+
+## Páginas
+
+- [Landing principal](https://proparking.mx/): producto, cómo funciona, beneficios, planes y preguntas frecuentes.
+- [Acerca de](https://proparking.mx/about): qué hace ProParking, cómo trabaja y quién está detrás del proyecto.
+- [Aviso de privacidad](https://proparking.mx/privacy): tratamiento de datos personales.
+- [Términos y condiciones](https://proparking.mx/terms-and-conditions): licencia, paquetes, precios y responsabilidades.
+
+## Compañía
+
+ProParking es un producto de Digital Dynamics, con sede en Culiacán, Sinaloa, México.

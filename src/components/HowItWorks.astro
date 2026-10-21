@@ -1,0 +1,127 @@
+---
+const steps = [
+  {
+    n: '01',
+    title: 'Recepción',
+    body: 'El valet registra el vehículo en la App Ticketero y genera el boleto digital al instante.',
+  },
+  {
+    n: '02',
+    title: 'Resguardo',
+    body: 'Trazabilidad completa del vehículo mientras está en custodia: quién, cuándo y dónde.',
+  },
+  {
+    n: '03',
+    title: 'Cobro y cierre',
+    body: 'El cajero cobra en la App Cajero, cierra el boleto y entrega el vehículo al cliente.',
+  },
+  {
+    n: '04',
+    title: 'Reporte y auditoría',
+    body: 'El dueño ve todo en tiempo real desde el Web Admin: turnos, cobros y bitácora forense.',
+  },
+];
+---
+
+<section id="como-funciona" class="bg-white py-20 sm:py-24" aria-labelledby="funciona-heading">
+  <div class="container-px">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Flujo operativo</span>
+        <h2 id="funciona-heading" class="section-title mt-4">Del boleto a la bitácora, sin fricción</h2>
+        <p class="section-lede">Cuatro pasos que conectan al valet, al cajero y al dueño del negocio en un mismo sistema.</p>
+      </div>
+
+      <div class="hidden gap-2 sm:flex" data-slider-controls="how">
+        <button type="button" class="slider-arrow" data-slider-prev aria-label="Paso anterior">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+        </button>
+        <button type="button" class="slider-arrow" data-slider-next aria-label="Siguiente paso">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="relative mt-12">
+      <div class="slider-track" data-slider="how">
+        {steps.map((step, i) => (
+          <article class="slider-slide w-[82%] sm:w-[46%] lg:w-[24%]">
+            <div class="h-full rounded-2xl border border-ink-700/8 bg-cream-50 p-7">
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-3xl font-extrabold text-orange-200">{step.n}</span>
+                {i < steps.length - 1 && (
+                  <svg xmlns="http://www.w3.org/2000/svg" class="hidden h-5 w-5 text-ink-200 lg:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                  </svg>
+                )}
+              </div>
+              <h3 class="mt-4 text-lg">{step.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-400">{step.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="mt-5 flex justify-center gap-2 sm:hidden" data-slider-dots="how"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initSlider(key: string) {
+    const track = document.querySelector<HTMLElement>(`[data-slider="${key}"]`);
+    const dotsWrap = document.querySelector<HTMLElement>(`[data-slider-dots="${key}"]`);
+    const controls = document.querySelector<HTMLElement>(`[data-slider-controls="${key}"]`);
+    if (!track) return;
+
+    const slides = Array.from(track.children) as HTMLElement[];
+    const prevBtn = controls?.querySelector<HTMLButtonElement>('[data-slider-prev]');
+    const nextBtn = controls?.querySelector<HTMLButtonElement>('[data-slider-next]');
+
+    if (dotsWrap) {
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'slider-dot';
+        dot.setAttribute('aria-label', `Ir a la tarjeta ${i + 1}`);
+        dot.dataset.active = i === 0 ? 'true' : 'false';
+        dot.addEventListener('click', () => slides[i].scrollIntoView({ behavior: 'smooth', inline: 'start' }));
+        dotsWrap.appendChild(dot);
+      });
+    }
+
+    function updateActive() {
+      const trackRect = track!.getBoundingClientRect();
+      let closestIndex = 0;
+      let closestDist = Infinity;
+      slides.forEach((slide, i) => {
+        const dist = Math.abs(slide.getBoundingClientRect().left - trackRect.left);
+        if (dist < closestDist) {
+          closestDist = dist;
+          closestIndex = i;
+        }
+      });
+      dotsWrap?.querySelectorAll('.slider-dot').forEach((dot, i) => {
+        (dot as HTMLElement).dataset.active = String(i === closestIndex);
+      });
+      if (prevBtn) prevBtn.disabled = closestIndex === 0;
+      if (nextBtn) nextBtn.disabled = closestIndex === slides.length - 1;
+    }
+
+    function scrollByStep(dir: 1 | -1) {
+      const amount = slides[0]?.getBoundingClientRect().width + 20;
+      track!.scrollBy({ left: amount * dir, behavior: 'smooth' });
+    }
+
+    prevBtn?.addEventListener('click', () => scrollByStep(-1));
+    nextBtn?.addEventListener('click', () => scrollByStep(1));
+    track.addEventListener('scroll', () => requestAnimationFrame(updateActive), { passive: true });
+    updateActive();
+  }
+
+  initSlider('how');
+</script>
