@@ -70,10 +70,14 @@
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           access_key: accessKey,
-          subject: 'Nueva solicitud de demo — ProParking',
-          from_name: 'Landing ProParking',
+          subject: `📩 Nuevo lead de demo — ${email}`,
+          from_name: 'ProParking · Formulario de demo',
           email,
-          message: `Solicitud de demo desde la landing de ProParking. Correo del interesado: ${email}`,
+          message:
+            `Nueva solicitud de demo desde proparking.mx\n\n` +
+            `Correo del interesado: ${email}\n` +
+            `Fecha: ${new Date().toLocaleString('es-MX', { dateStyle: 'full', timeStyle: 'short' })}\n\n` +
+            `Responde directamente a este correo (el "Responder" ya va dirigido a ${email}).`,
           botcheck: (form.elements.namedItem('botcheck') as HTMLInputElement)?.checked ?? false,
         }),
       });
